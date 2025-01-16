@@ -11,7 +11,11 @@ def main():
     print(f"Screen width: {constants.SCREEN_WIDTH}")
     print(f"Screen height: {constants.SCREEN_HEIGHT}")
 
-    #Setting Up and Init the Game Screen
+    gametime = pygame.time.Clock()
+    dt = 0
+    dt = gametime.tick(60)/1000
+
+    #Setup and Init the Game Screen
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     while True:
         for event in pygame.event.get():
