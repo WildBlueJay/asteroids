@@ -2,6 +2,8 @@ import pygame
 from pygame.locals import *
 import constants
 from constants import *
+import player
+from player import *
 
 def main():
     pygame.init()
@@ -17,11 +19,17 @@ def main():
 
     #Setup and Init the Game Screen
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    #adding the player
+    player1 = player.Player(SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
+    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-        screen.fill((0,0,0), rect=None, special_flags=0)
+        screen.fill((0,0,0))
+        
+        player1.draw(screen)
+
         pygame.display.flip()
 
 if __name__ == "__main__":
