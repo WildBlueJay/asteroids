@@ -15,7 +15,7 @@ def main():
 
     gametime = pygame.time.Clock()
     dt = 0
-    dt = gametime.tick(60)/1000
+    print(dt)
 
     #Setup and Init the Game Screen
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -23,13 +23,22 @@ def main():
     player1 = player.Player(SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
     
     while True:
+        # Calculate dt every frame
+        dt = gametime.tick(60) / 1000
+
+        # Handle events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-        screen.fill((0,0,0))
+
+        # Clear the screen
+        screen.fill("black")
         
+        # Update and draw the player
+        player1.update(dt)
         player1.draw(screen)
 
+        # Refresh the display
         pygame.display.flip()
 
 if __name__ == "__main__":
