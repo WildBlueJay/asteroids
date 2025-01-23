@@ -1,3 +1,4 @@
+import sys
 import pygame
 from constants import *
 from player import Player
@@ -7,7 +8,7 @@ from asteroidfield import AsteroidField
 def main():
     pygame.init()
 
-    #Required print for the assignment
+    # Required print for the assignment
     #print("Starting asteroids!")
     #print(f"Screen width: {constants.SCREEN_WIDTH}")
     #print(f"Screen height: {constants.SCREEN_HEIGHT}")
@@ -16,10 +17,10 @@ def main():
     dt = 0
     #DB print(dt)
 
-    #Setup and Init the Game Screen
+    # Setup and Init the Game Screen
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-    #adding the player and initiating groups
+    #Adding the player and initiating groups
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
@@ -34,13 +35,20 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-
-        # Clear the screen
-        screen.fill("black")
         
         # Draw and update the player
         for object in updatable:
             object.update(dt)
+        # Check for collisions
+        for asteroid in asteroids:
+            if(asteroid.check_collision(player1)):
+                print("Game Over!")
+                sys.exit()
+
+        # Clear the screen
+        screen.fill("black")
+
+        # Add drawable objects
         for object in drawable:
             object.draw(screen)
 
